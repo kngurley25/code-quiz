@@ -1,0 +1,52 @@
+/* remove default margin and borders */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* root page variables */
+:root {
+    --button-select: #800080;
+    --button-font: white;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main h1 {
+    font-weight: bolder;
+    padding: 25px;
+}
+
+main p {
+    padding: 25px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.start-button {
+    outline: none;
+    border: none;
+    display: inline-block;
+    background-color: var(--button-select);
+    font-size: 1.5rem;
+    color: var(--button-font);
+    border-radius: 10px;
+}
+
