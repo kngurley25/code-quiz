@@ -11,6 +11,7 @@
     --button-font: white;
 }
 
+/* HTML styled elements */
 body {
     background-color: #f2f2f2;
     font-family: Arial, Helvetica, sans-serif;
@@ -51,3 +52,17 @@ main p {
     margin: 25px;
 }
 
+/* styled JS items */
+.question-page {
+    margin: auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-start;
+}
+
+.question {
+    font-weight: bolder;
+    padding: 25px;
+}
