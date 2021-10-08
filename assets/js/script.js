@@ -1,6 +1,8 @@
 // DOM elements from HTML
 var startButtonEl = document.querySelector("#start-button");
 var homePageEl = document.querySelector(".home-page");
+var timerEl = document.querySelector("#timer");
+
 
 // variables to create code questions
 var questionPageEl = document.createElement("div");
@@ -9,6 +11,22 @@ var questionEl = document.createElement("h2");
 questionEl.className = "question";
 var answerListEl = document.createElement("ul");
 var choiceEl = document.createElement("li");
+
+// quiz timer
+function quizTimer () {
+    var count = 60;
+    
+    var timeInterval = setInterval(function () {
+        if (count > 1) {
+            timerEl.textContent = count;
+            count--;
+        } else {
+            timerEl.textContent = "";
+            clearInterval(timeInterval);
+            endGame();
+        }
+    }, 1000);
+}
 
 // array for code questions
 var questionBank = [
@@ -34,13 +52,11 @@ var quizQuestion = function ()  {
 
         questionEl.textContent = question;
         answerListEl.textContent = options;
-        
+
         questionPageEl.appendChild(questionEl);
         questionPageEl.appendChild(answerListEl);
     }
 }
-
-quizQuestion();
 
 
 
@@ -53,9 +69,14 @@ quizQuestion();
 
 
 
+// function to end quiz
+
+
+
 // event listener to hide opening home page when start button is clicked
 startButtonEl.addEventListener("click", function() {
     homePageEl.style.display = "none";
+    quizTimer();
 
     // call function to start quiz
 
