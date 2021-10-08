@@ -36,9 +36,33 @@ main h1 {
 }
 
 main p {
-    padding: 25px;
+    padding: 5px 25px;
     text-align: center;
     font-size: 1.2rem;
+}
+
+.question-page {
+    margin: auto;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.question {
+    font-weight: lighter;
+    padding: 25px;
+}
+
+.answer-list {
+    padding:5px 25px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.answer-list li {
+    padding: 5px 25px;
 }
 
 .button {
@@ -46,23 +70,9 @@ main p {
     border: none;
     display: inline-block;
     background-color: var(--button-select);
-    font-size: 1.5rem;
     color: var(--button-font);
     border-radius: 10px;
-    margin: 25px;
-}
-
-/* styled JS items */
-.question-page {
     margin: auto;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    align-items: flex-start;
 }
 
-.question {
-    font-weight: bolder;
-    padding: 25px;
-}
+
