@@ -20,20 +20,26 @@
         </div>
     </header>
 
-    <main>
+    <section class="home-page">
         <h1>Coding Quiz Challenge</h1>
         <p>
             Try to answer the following code-related questions within the time limit.
             <br>
-            <br>
             Keep in mind that incorrect answers will penalize your score/ time by ten seconds!
         </p>
-        <button class="start-button">
+        <button class="button" id="start-button">
             <p>
                 Start Quiz
             </p>
         </button>
-    </main>
+    </section>
+
+    <section class="question-page" data-state="hidden">
+        <h2 class="question-text">question placeholder</h2>
+        <ul class="answer-list">
+            <li class="answer-item">answer placeholder</li>
+        </ul>
+    </section>
 
     <script src="./assets/js/script.js"></script>
 </body>
