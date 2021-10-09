@@ -41,15 +41,14 @@ var startQuiz = function () {
 
 // quiz timer
 function quizTimer () {
-    var count = 60;
+    var count = 1;
     var timeInterval = setInterval(function () {
-        if (count > 0) {
+        if (count >= 1 && questionCounter < questionArray.length) {
             timerEl.textContent = count;
-            count--;
+            count++;
         } else {
-            timerEl.textContent = "";
+            timerEl.textContent = "End Game";
             clearInterval(timeInterval);
-            //endGame();
         }
     }, 1000);
 }
