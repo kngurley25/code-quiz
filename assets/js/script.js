@@ -40,12 +40,12 @@ var startQuiz = function () {
 }
 
 // quiz timer
-function quizTimer () {
-    var count = 1;
+var count = 59;
+var quizTimer = function quizTimer () {
     var timeInterval = setInterval(function () {
         if (count >= 1 && questionCounter < questionArray.length) {
             timerEl.textContent = count;
-            count++;
+            count--;
         } else {
             timerEl.textContent = "End Game";
             clearInterval(timeInterval);
@@ -111,8 +111,9 @@ var checkAnswer = function (event) {
     else {
         var confirmMessageEl = document.createElement("h3");
         confirmMessageEl.className = "question-confirm-message";
-        confirmMessageEl.textContent = "Question " + (questionCounter +1) + " is incorrect! 10 seconds added!";
+        confirmMessageEl.textContent = "Question " + (questionCounter +1) + " is incorrect! 10 seconds removed!";
         questionPageEl.appendChild(confirmMessageEl);
+        count = count - 10;
         // TODO implement incorrect answer logic
     }
 
