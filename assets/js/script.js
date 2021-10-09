@@ -53,6 +53,7 @@ function quizTimer () {
 }
 
 // questions array
+var questionCounter = 0;
 var questionArray = [
     { question: "What is xxx",
         answers: {a: "abc", b: "bdc", c: "cde", d: "def"},
@@ -74,19 +75,29 @@ var questionArray = [
 
 var quizQuestions = function () {
 
-    var questions = [];
-    var answers = [];
-    for (var i = 0; i < questionArray.length; i++) {
-        questions.push(questionArray[i].question);
-        answers.push(questionArray[i].answers);
+    var questionAnswer = [];
+    var question = [];
+    questionAnswer.push(questionArray[questionCounter]);
+    question.push(questionArray[questionCounter].question);
+    //console.log(questionAnswer);
 
-        questionEl.textContent = questions[i];
-        answerOneEl.textContent = answers[i];
+    questionEl.textContent = question;
+    //console.log(questionEl);
+
+    var answers = [];
+    answers.push(questionArray[questionCounter].answers);
+    console.log(answers);
+    
+    for (var i = 0; i < questionAnswer.length; i++) {
+        answers.push(questionAnswer[i].answers);
+
+        answerOneEl.textContent = questionAnswer[i].answers.a;
+        answerTwoEl.textContent = questionAnswer[i].answers.b;
+        answerThreeEl.textContent = questionAnswer[i].answers.c;
+        answerFourEl.textContent = questionAnswer[i].answers.d;
 
     }
-
-    
-
+    questionCounter++;
 }
 
 // event listener to hide opening home page and start quiz when start button is clicked
