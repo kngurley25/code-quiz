@@ -104,16 +104,23 @@ var checkAnswer = function (event) {
     // console.log(answerKey === correct);
 
     if (answerKey === correct) {
-        
+        var confirmMessageEl = document.createElement("h3");
+        confirmMessageEl.className = "question-confirm-message";
+        confirmMessageEl.textContent = "Question " + (questionCounter +1) + " is correct!";
+        questionPageEl.appendChild(confirmMessageEl);
     }
     else {
+        var confirmMessageEl = document.createElement("h3");
+        confirmMessageEl.className = "question-confirm-message";
+        confirmMessageEl.textContent = "Question " + (questionCounter +1) + " is incorrect! 10 seconds added!";
+        questionPageEl.appendChild(confirmMessageEl);
         // TODO implement incorrect answer logic
     }
 
     questionCounter++;
-
+    
     quizQuestions();
-
+    
     // console.dir(event.target);
     // console.log(event.target);
 }

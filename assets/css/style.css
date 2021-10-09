@@ -86,4 +86,8 @@ main p {
     height: 50px;
 }
 
-
+/* JS style */
+.question-confirm-message {
+    text-align: center;
+    font-weight: lighter;
+}
