@@ -6,9 +6,10 @@ var timerEl = document.querySelector("#timer");
 var questionPageEl = document.querySelector(".question-page");
 var questionEl = document.querySelector(".question");
 var answerListEl = document.querySelector(".answer-list");
-var answerOptionEl = document.querySelector(".answer-button");
-
-var answerButtonEl = document.querySelector("#answer-button");
+var answerOneEl = document.querySelector("#answer-button-one");
+var answerTwoEl = document.querySelector("#answer-button-two");
+var answerThreeEl = document.querySelector("#answer-button-three");
+var answerFourEl = document.querySelector("#answer-button-four");
 
 // hide initial question HTML elements before starting quiz
 var state = questionPageEl.getAttribute("data-state");
@@ -71,14 +72,22 @@ var questionArray = [
     }
 ];
 
-// var quizQuestions = function () {
-    
-    
-//     for (var i = 0; i < questionArray.length; i++) {
-//         questionEl.textContent = questionArray.question;
-//     }
+var quizQuestions = function () {
 
-// }
+    var questions = [];
+    var answers = [];
+    for (var i = 0; i < questionArray.length; i++) {
+        questions.push(questionArray[i].question);
+        answers.push(questionArray[i].answers);
+
+        questionEl.textContent = questions[i];
+        answerOneEl.textContent = answers[i];
+
+    }
+
+    
+
+}
 
 // event listener to hide opening home page and start quiz when start button is clicked
 startButtonEl.addEventListener("click", startQuiz);
