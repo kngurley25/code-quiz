@@ -36,21 +36,29 @@ var startQuiz = function () {
     quizTimer();
     questionPageEl.setAttribute("data-state","visible");
     showHideQuestions();
-    quizQuestions();
+    updateQuestion();
 }
 
 // quiz timer
 var count = 59;
-var quizTimer = function quizTimer () {
+var quizTimer = function () {
     var timeInterval = setInterval(function () {
-        if (count >= 1 && questionCounter < questionArray.length) {
+        if (count >= 1 && questionCounter <= questionArray.length -1) {
             timerEl.textContent = count;
             count--;
-        } else {
-            timerEl.textContent = "End Game";
-            clearInterval(timeInterval);
+        } 
+        else {
+            clearInterval(timeInterval)
+            endGame();
         }
     }, 1000);
+}
+
+// function to end game
+var endGame = function () {
+    if (count === 0 || questionCounter <= questionArray.length -1) {
+        timerEl.textContent = "End Game";
+    }
 }
 
 // questions array
@@ -74,8 +82,9 @@ var questionArray = [
     }
 ];
 
-var quizQuestions = function () {
+var updateQuestion = function () {
     
+    if (count >= 1 && questionCounter <= questionArray.length -1) {
     console.log(questionCounter);
     
     // var question = [];
@@ -92,7 +101,10 @@ var quizQuestions = function () {
     answerBEl.textContent = questionArray[questionCounter].answers.b;
     answerCEl.textContent = questionArray[questionCounter].answers.c;
     answerDEl.textContent = questionArray[questionCounter].answers.d;  
-
+    }
+    else {
+        endGame();
+    }
 }
 
 
@@ -114,16 +126,17 @@ var checkAnswer = function (event) {
         confirmMessageEl.textContent = "Question " + (questionCounter +1) + " is incorrect! 10 seconds removed!";
         questionPageEl.appendChild(confirmMessageEl);
         count = count - 10;
-        // TODO implement incorrect answer logic
     }
 
     questionCounter++;
     
-    quizQuestions();
+    updateQuestion();
     
     // console.dir(event.target);
     // console.log(event.target);
 }
+
+
 
 
 // event listeners for clicking through questions
