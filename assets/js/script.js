@@ -6,7 +6,7 @@ var timerEl = document.querySelector("#timer");
 var questionPageEl = document.querySelector(".question-page");
 var questionEl = document.querySelector(".question");
 var answerListEl = document.querySelector(".answer-list");
-var answerOptionEl = document.querySelector(".answer-option");
+var answerOptionEl = document.querySelector(".answer-button");
 
 var answerButtonEl = document.querySelector("#answer-button");
 
@@ -33,6 +33,7 @@ var startQuiz = function () {
     quizTimer();
     questionPageEl.setAttribute("data-state","visible");
     showHideQuestions();
+    quizQuestions();
 }
 
 // quiz timer
@@ -70,9 +71,14 @@ var questionArray = [
     }
 ];
 
-var quizQuestions = function () {
+// var quizQuestions = function () {
+    
+    
+//     for (var i = 0; i < questionArray.length; i++) {
+//         questionEl.textContent = questionArray.question;
+//     }
 
-}
+// }
 
 // event listener to hide opening home page and start quiz when start button is clicked
 startButtonEl.addEventListener("click", startQuiz);

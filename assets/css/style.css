@@ -59,10 +59,19 @@ main p {
     padding:5px 25px;
     text-align: center;
     font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    list-style-type: none;
 }
 
 .answer-list li {
+    margin: 10px auto;
+}
+.answer-list p {
     padding: 5px 25px;
+    text-align: center;
+    font-size: 1.2rem;
 }
 
 .button {
