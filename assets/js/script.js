@@ -6,10 +6,10 @@ var timerEl = document.querySelector("#timer");
 var questionPageEl = document.querySelector(".question-page");
 var questionEl = document.querySelector(".question");
 
-var answerOneEl = document.querySelector("#answer-button-one");
-var answerTwoEl = document.querySelector("#answer-button-two");
-var answerThreeEl = document.querySelector("#answer-button-three");
-var answerFourEl = document.querySelector("#answer-button-four");
+var answerAEl = document.querySelector("#answer-button-a");
+var answerBEl = document.querySelector("#answer-button-b");
+var answerCEl = document.querySelector("#answer-button-c");
+var answerDEl = document.querySelector("#answer-button-d");
 
 
 
@@ -57,77 +57,73 @@ function quizTimer () {
 // questions array
 var questionCounter = 0;
 var questionArray = [
-    { question: "What is xxx",
-        answers: {a: "abc", b: "bdc", c: "cde", d: "def"},
-        correct: "cde",
+    { question: "What is q1",
+        answers: {a: "q1a1", b: "q1a2", c: "q1a3", d: "q1 correct"},
+        correct: "d",
     },
-    { question: "What is yyy",
-        answers: {a: "abc", b: "bdc", c: "cde", d: "def"},
-        correct: "abc",
+    { question: "What is q2",
+        answers: {a: "q2a1", b: "q2a2", c: "q2 correct", d: "q2a4"},
+        correct: "c",
     },
-    { question: "What is zzz",
-        answers: {a: "abc", b: "bdc", c: "cde", d: "def"},
-        correct: "abc",
+    { question: "What is q3",
+        answers: {a: "q3a1", b: "q3 correct", c: "q3a3", d: "q3a4"},
+        correct: "b",
     },
-    { question: "What is uuu",
-        answers: {a: "abc", b: "bdc", c: "cde", d: "def"},
-        correct: "abc",
+    { question: "What is q4",
+        answers: {a: "q4 correct", b: "q4a2", c: "q4a3", d: "q4a4"},
+        correct: "a",
     }
 ];
 
 var quizQuestions = function () {
-
-    var questionAnswer = [];
-    var question = [];
-    questionAnswer.push(questionArray[questionCounter]);
-    question.push(questionArray[questionCounter].question);
-    //console.log(questionAnswer);
-
-    questionEl.textContent = question;
-    //console.log(questionEl);
-
-    var answers = [];
-    answers.push(questionArray[questionCounter].answers);
-    console.log(answers);
     
-    for (var i = 0; i < questionAnswer.length; i++) {
-        answers.push(questionAnswer[i].answers);
+    console.log(questionCounter);
+    
+    // var question = [];
+    // question.push(questionArray[questionCounter].question);
+    // console.log(question);
 
-        answerOneEl.textContent = questionAnswer[i].answers.a;
-        answerTwoEl.textContent = questionAnswer[i].answers.b;
-        answerThreeEl.textContent = questionAnswer[i].answers.c;
-        answerFourEl.textContent = questionAnswer[i].answers.d;
+    questionEl.textContent = questionArray[questionCounter].question;
 
+    // var answers = [];
+    // answers.push(questionArray[questionCounter].answers);
+    // console.log(answers);
+
+    answerAEl.textContent = questionArray[questionCounter].answers.a;
+    answerBEl.textContent = questionArray[questionCounter].answers.b;
+    answerCEl.textContent = questionArray[questionCounter].answers.c;
+    answerDEl.textContent = questionArray[questionCounter].answers.d;  
+
+}
+
+
+var checkAnswer = function (event) {
+    
+    var answerKey = event.target.id.split("-")[2];
+    var correct = questionArray[questionCounter].correct;
+    // console.log(answerKey === correct);
+
+    if (answerKey === correct) {
         
     }
-    
-    // if (questionAnswer[i].answers.a === questionAnswer[i].correct) {
-    //     answerOneEl.addEventListener("click", quizQuestions);
-    // }
-    // else if (questionAnswer[i].answers.b === questionAnswer[i].correct) {
-    //     answerTwoEl.addEventListener("click", quizQuestions);
-    // }
-    // else if (questionAnswer[i].answers.c === questionAnswer[i].correct) {
-    //     answerThreeEl.addEventListener("click", quizQuestions);
-    // }
-    // else if (questionAnswer[i].answers.c === questionAnswer[i].correct) {
-    //     answerFourEl.addEventListener("click", quizQuestions);
-    // }
-    // else {
-    //     answerOneEl.addEventListener("click", prompt("try again"));
-    //     answerTwoEl.addEventListener("click", prompt("try again"));
-    //     answerThreeEl.addEventListener("click", prompt("try again"));
-    //     answerFourEl.addEventListener("click", prompt("try again"));
-    // }
-    
+    else {
+        // TODO implement incorrect answer logic
+    }
 
     questionCounter++;
+
+    quizQuestions();
+
+    // console.dir(event.target);
+    // console.log(event.target);
 }
 
-var nextQuestion = function () {
-    answerOneEl.addEventListener("click", quizQuestions);
-}
 
+// event listeners for clicking through questions
+answerAEl.addEventListener("click", checkAnswer)
+answerBEl.addEventListener("click", checkAnswer)
+answerCEl.addEventListener("click", checkAnswer)
+answerDEl.addEventListener("click", checkAnswer)
 
 
 // event listener to hide opening home page and start quiz when start button is clicked
