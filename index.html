@@ -59,14 +59,21 @@
 
     <main class="end-page" data-state="hidden">
         <h1>Quiz Completed!</h1>
-        <p>
-            Your final score is: <div class="final-score"></div>
-        </p>
-        <button class="button" id="start-button">
+        <p id="final-score"></p>
+        <form id="name-form">
+            <div class="form">
+            <input type="text" placeholder="Enter initials"/>
+            </div>
+        </form>
+        <button class="button" id="score-submit">
             <p>
                 Submit
             </p>
         </button>
+    </main>
+
+    <main class="score-page" data-state="hidden">
+        <h1>High Scores</h1>
     </main>
 
     <script src="./assets/js/script.js"></script>

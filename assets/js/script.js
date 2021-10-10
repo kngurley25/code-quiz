@@ -12,20 +12,27 @@ var answerCEl = document.querySelector("#answer-button-c");
 var answerDEl = document.querySelector("#answer-button-d");
 
 var endPageEl = document.querySelector(".end-page");
+var finalScoreEl = document.querySelector("#final-score");
+
+var scorePageEl = document.querySelector(".score-page");
+var submitScore = document.querySelector("#score-submit");
 
 
-// hide initial question and end page HTML elements before starting quiz
+// hide initial question/ end page/ score page HTML elements before starting quiz
 var questionPageElState = questionPageEl.getAttribute("data-state");
     if (questionPageElState === "hidden") {
         questionPageEl.style.display = "none";
     }
-var endPageElState = questionPageEl.getAttribute("data-state");
+var endPageElState = endPageEl.getAttribute("data-state");
     if (endPageElState === "hidden") {
         endPageEl.style.display = "none";
     }
+var scorePageElState = scorePageEl.getAttribute("data-state");
+    if (scorePageElState === "hidden") {
+        scorePageEl.style.display = "none";
+    }
 
-
-// function to keep a question page hidden until data state changes
+// function to keep a question page hidden until data state changes -- COMBINE THIS
 var showHideQuestions = function () {
     var state = questionPageEl.getAttribute("data-state");
     if (state === "hidden") {
@@ -36,7 +43,7 @@ var showHideQuestions = function () {
     }
 }
 
-// function to keep end page hidden until data state changes
+// function to keep end page hidden until data state changes -- COMBINE THIS
 var showHideEndPage = function () {
     var state = endPageEl.getAttribute("data-state");
     if (state === "hidden") {
@@ -47,10 +54,20 @@ var showHideEndPage = function () {
     }
 }
 
+// function to keep score page hidden until data state changes -- COMBINE THIS
+var showHideScorePage = function () {
+    var state = scorePageEl.getAttribute("data-state");
+    if (state === "hidden") {
+        scorePageEl.style.display = "none";
+    }
+    else {
+        scorePageEl.style.display = "block";
+    }
+}
+
 // function to start quiz
 var startQuiz = function () {
     homePageEl.style.display = "none";
-    endPageEl.style.display = "none";
     quizTimer();
     questionPageEl.setAttribute("data-state","visible");
     showHideQuestions();
@@ -61,12 +78,14 @@ var startQuiz = function () {
 var count = 59;
 var quizTimer = function () {
     var timeInterval = setInterval(function () {
-        if (count > 0 && (questionCounter + 1) < questionArray.length) {
+        if (count > 0 && ((questionCounter + 1) <= questionArray.length)) {
+            // TODO need to come up with condition to stop timer after last question answered
             timerEl.textContent = count;
             count--;
         }
         else {
             clearInterval(timeInterval);
+            timerEl.textContent = "End of Game";
         }
     }, 1000);
 }
@@ -78,6 +97,8 @@ var endGame = function () {
     showHideQuestions();
     endPageEl.setAttribute("data-state", "visible");
     showHideEndPage();
+
+    finalScoreEl.textContent = "Your score is " + count + "!";
 }
 
 // questions array
@@ -122,7 +143,6 @@ var updateQuestion = function () {
 
 }
 
-
 var checkAnswer = function (event) {
 
     if ((questionCounter + 1) === questionArray.length) {
@@ -156,15 +176,25 @@ var checkAnswer = function (event) {
     // console.log(event.target);
 }
 
+var scorePage = function () {
+    endPageEl.setAttribute("data-state", "hidden");
+    showHideEndPage();
+    scorePageEl.setAttribute("data-state", "visible");
+    showHideScorePage();
+}
+
+// event listener to hide opening home page and start quiz when start button is clicked
+startButtonEl.addEventListener("click", startQuiz);
 
 // event listeners for clicking through questions
-
 answerAEl.addEventListener("click", checkAnswer);
 answerBEl.addEventListener("click", checkAnswer);
 answerCEl.addEventListener("click", checkAnswer);
 answerDEl.addEventListener("click", checkAnswer);
 
-// event listener to hide opening home page and start quiz when start button is clicked
-startButtonEl.addEventListener("click", startQuiz);
+// event listeners for end page to go to score page when submit button is clicked
+submitScore.addEventListener("click", scorePage);
+
+
 
 
