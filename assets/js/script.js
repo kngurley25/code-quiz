@@ -11,13 +11,19 @@ var answerBEl = document.querySelector("#answer-button-b");
 var answerCEl = document.querySelector("#answer-button-c");
 var answerDEl = document.querySelector("#answer-button-d");
 
+var endPageEl = document.querySelector(".end-page");
 
 
-// hide initial question HTML elements before starting quiz
-var state = questionPageEl.getAttribute("data-state");
-    if (state === "hidden") {
+// hide initial question and end page HTML elements before starting quiz
+var questionPageElState = questionPageEl.getAttribute("data-state");
+    if (questionPageElState === "hidden") {
         questionPageEl.style.display = "none";
     }
+var endPageElState = questionPageEl.getAttribute("data-state");
+    if (endPageElState === "hidden") {
+        endPageEl.style.display = "none";
+    }
+
 
 // function to keep a question page hidden until data state changes
 var showHideQuestions = function () {
@@ -30,9 +36,21 @@ var showHideQuestions = function () {
     }
 }
 
+// function to keep end page hidden until data state changes
+var showHideEndPage = function () {
+    var state = endPageEl.getAttribute("data-state");
+    if (state === "hidden") {
+        endPageEl.style.display = "none";
+    }
+    else {
+        endPageEl.style.display = "block";
+    }
+}
+
 // function to start quiz
 var startQuiz = function () {
     homePageEl.style.display = "none";
+    endPageEl.style.display = "none";
     quizTimer();
     questionPageEl.setAttribute("data-state","visible");
     showHideQuestions();
@@ -43,22 +61,19 @@ var startQuiz = function () {
 var count = 59;
 var quizTimer = function () {
     var timeInterval = setInterval(function () {
-        if (count >= 1 && questionCounter <= questionArray.length -1) {
+        if (count > 0 && questionCounter < questionArray.length) {
             timerEl.textContent = count;
             count--;
-        } 
-        else {
-            clearInterval(timeInterval)
-            endGame();
         }
     }, 1000);
 }
 
+
 // function to end game
 var endGame = function () {
-    if (count === 0 || questionCounter <= questionArray.length -1) {
-        timerEl.textContent = "End Game";
-    }
+    clearInterval(quizTimer);
+    endPageEl.setAttribute("data-state", "visible");
+    showHideEndPage;
 }
 
 // questions array
@@ -83,8 +98,7 @@ var questionArray = [
 ];
 
 var updateQuestion = function () {
-    
-    if (count >= 1 && questionCounter <= questionArray.length -1) {
+
     console.log(questionCounter);
     
     // var question = [];
@@ -101,15 +115,12 @@ var updateQuestion = function () {
     answerBEl.textContent = questionArray[questionCounter].answers.b;
     answerCEl.textContent = questionArray[questionCounter].answers.c;
     answerDEl.textContent = questionArray[questionCounter].answers.d;  
-    }
-    else {
-        endGame();
-    }
+
 }
 
 
 var checkAnswer = function (event) {
-    
+
     var answerKey = event.target.id.split("-")[2];
     var correct = questionArray[questionCounter].correct;
     // console.log(answerKey === correct);
@@ -127,24 +138,22 @@ var checkAnswer = function (event) {
         questionPageEl.appendChild(confirmMessageEl);
         count = count - 10;
     }
-
+    
     questionCounter++;
-    
+    endGame();
     updateQuestion();
-    
+
     // console.dir(event.target);
     // console.log(event.target);
 }
 
 
-
-
 // event listeners for clicking through questions
-answerAEl.addEventListener("click", checkAnswer)
-answerBEl.addEventListener("click", checkAnswer)
-answerCEl.addEventListener("click", checkAnswer)
-answerDEl.addEventListener("click", checkAnswer)
 
+answerAEl.addEventListener("click", checkAnswer);
+answerBEl.addEventListener("click", checkAnswer);
+answerCEl.addEventListener("click", checkAnswer);
+answerDEl.addEventListener("click", checkAnswer);
 
 // event listener to hide opening home page and start quiz when start button is clicked
 startButtonEl.addEventListener("click", startQuiz);
