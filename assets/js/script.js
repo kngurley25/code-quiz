@@ -17,6 +17,8 @@ var finalScoreEl = document.querySelector("#final-score");
 var scorePageEl = document.querySelector(".score-page");
 var submitScore = document.querySelector("#score-submit");
 
+var nameInput = document.querySelector("#name-input");
+
 
 // hide initial question/ end page/ score page HTML elements before starting quiz
 var questionPageElState = questionPageEl.getAttribute("data-state");
@@ -181,6 +183,11 @@ var scorePage = function () {
     showHideEndPage();
     scorePageEl.setAttribute("data-state", "visible");
     showHideScorePage();
+}
+
+var highScores = {
+    Name: nameInput.value
+
 }
 
 // event listener to hide opening home page and start quiz when start button is clicked
