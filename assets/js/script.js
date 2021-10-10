@@ -61,9 +61,12 @@ var startQuiz = function () {
 var count = 59;
 var quizTimer = function () {
     var timeInterval = setInterval(function () {
-        if (count > 0 && questionCounter < questionArray.length) {
+        if (count > 0 && (questionCounter + 1) < questionArray.length) {
             timerEl.textContent = count;
             count--;
+        }
+        else {
+            clearInterval(timeInterval);
         }
     }, 1000);
 }
@@ -71,9 +74,10 @@ var quizTimer = function () {
 
 // function to end game
 var endGame = function () {
-    clearInterval(quizTimer);
+    questionPageEl.setAttribute("data-state", "hidden");
+    showHideQuestions();
     endPageEl.setAttribute("data-state", "visible");
-    showHideEndPage;
+    showHideEndPage();
 }
 
 // questions array
@@ -121,6 +125,11 @@ var updateQuestion = function () {
 
 var checkAnswer = function (event) {
 
+    if ((questionCounter + 1) === questionArray.length) {
+        console.log("no questions remaining");
+        endGame();
+    }
+    else {
     var answerKey = event.target.id.split("-")[2];
     var correct = questionArray[questionCounter].correct;
     // console.log(answerKey === correct);
@@ -140,9 +149,9 @@ var checkAnswer = function (event) {
     }
     
     questionCounter++;
-    endGame();
+    
     updateQuestion();
-
+    }
     // console.dir(event.target);
     // console.log(event.target);
 }
