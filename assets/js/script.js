@@ -16,8 +16,7 @@ var finalScoreEl = document.querySelector("#final-score");
 
 var scorePageEl = document.querySelector(".score-page");
 var submitScore = document.querySelector("#score-submit");
-
-var nameInput = document.querySelector("#name-input");
+var scoreListEl = document.querySelector("#score-list");
 
 
 // hide initial question/ end page/ score page HTML elements before starting quiz
@@ -92,13 +91,12 @@ var quizTimer = function () {
     }, 1000);
 }
 
-
 // function to end game
 var endGame = function () {
     questionPageEl.setAttribute("data-state", "hidden");
     showHideQuestions();
     endPageEl.setAttribute("data-state", "visible");
-    showHideEndPage();
+    showHideEndPage(); 
 
     finalScoreEl.textContent = "Your score is " + count + "!";
 }
@@ -183,11 +181,19 @@ var scorePage = function () {
     showHideEndPage();
     scorePageEl.setAttribute("data-state", "visible");
     showHideScorePage();
+
+    addScore();
+
 }
 
-var highScores = {
-    Name: nameInput.value
+var addScore = function () {
+    
+    var nameInput = document.querySelector("input[name='player-name']").value;
 
+    var scoreItemEl = document.createElement("li");
+    scoreItemEl.textContent = "Name: " + nameInput + "    " + "Score: " + count;
+
+    scoreListEl.appendChild(scoreItemEl);
 }
 
 // event listener to hide opening home page and start quiz when start button is clicked
