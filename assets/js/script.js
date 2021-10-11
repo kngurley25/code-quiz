@@ -116,7 +116,7 @@ var questionArray = [
         answers: {a: "DOM", b: "Function", c: "Object", d: "Event"},
         correct: "d",
     },
-    { question: "Which of the following code would dynamically create an HTML element using JavaScript?",
+    { question: "Which of the following code would dynamically create an HTML element?",
         answers: {a: "element.value", b: "element.textContent", c: "document.createElement('li')", d: "element.appendChild()"},
         correct: "c",
     },

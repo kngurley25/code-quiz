@@ -33,6 +33,7 @@ main {
 main h1 {
     font-weight: bolder;
     padding: 25px;
+    text-align: center;
 }
 
 main p {
@@ -86,22 +87,32 @@ main p {
     height: 50px;
 }
 
-form {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
+form {   
     margin: 10px 6px 10px 0;
-    flex: 1;
+}
+.form-group {
+    display: flex;
+    flex: wrap;
+    flex-direction: column;
+    align-items: center;
 }
   
 form input {
     outline: none;
     border: none;
     padding: 12px;
-    width: 100%;
-    font-size: 2.2rem;
+    width: 50%;
+    font-size: 1.5rem;
     border: 2px solid var(--grey);
     border-radius: 12px;
+}
+
+#score-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    list-style-type: none;
 }
 
 /* JS style */
@@ -109,3 +120,4 @@ form input {
     text-align: center;
     font-weight: lighter;
 }
+
