@@ -22,6 +22,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 40px;
+    font-size: 14px;
 }
 
 main {
@@ -113,6 +114,12 @@ form input {
     align-items: center;
     text-align: left;
     list-style-type: none;
+}
+
+#score-button {
+    outline: none;
+    border: none;
+    color: blue;
 }
 
 /* JS style */

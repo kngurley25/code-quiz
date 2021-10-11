@@ -26,6 +26,8 @@ var playerDataObj = {
     score: count
 }
 
+var scorePageLink = document.getElementById("score-link");
+
 // hide initial question/ end page/ score page HTML elements before starting quiz
 var questionPageElState = questionPageEl.getAttribute("data-state");
     if (questionPageElState === "hidden") {
@@ -70,6 +72,17 @@ var showHideScorePage = function () {
     }
     else {
         scorePageEl.style.display = "block";
+    }
+}
+
+// function to keep home page hidden until data state changes -- COMBINE THIS
+var showHideHomePage = function () {
+    var state = homePageEl.getAttribute("data-state");
+    if (state === "hidden") {
+        homePageEl.style.display = "none";
+    }
+    else {
+        homePageEl.style.display = "block";
     }
 }
 
@@ -185,6 +198,8 @@ var checkAnswer = function (event) {
 }
 
 var scorePage = function () {
+    homePageEl.setAttribute("data-state", "hidden");
+    showHideHomePage();
     endPageEl.setAttribute("data-state", "hidden");
     showHideEndPage();
     scorePageEl.setAttribute("data-state", "visible");
@@ -247,6 +262,9 @@ answerDEl.addEventListener("click", checkAnswer);
 
 // event listeners for end page to go to score page when submit button is clicked
 submitScore.addEventListener("click", scorePage);
+
+// event listener for score page link
+scorePageLink.addEventListener("click", scorePage);
 
 
 
