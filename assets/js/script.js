@@ -19,12 +19,6 @@ var submitScore = document.querySelector("#score-submit");
 var scoreListEl = document.querySelector("#score-list");
 
 var nameInput = document.querySelector("input[name='player-name']");
-var playerCounter = 0;
-var highScores = [];
-var playerDataObj = {
-    name: nameInput.value,
-    score: count
-}
 
 var scorePageLink = document.getElementById("score-link");
 
@@ -95,10 +89,11 @@ var startQuiz = function () {
     updateQuestion();
 }
 
+var timeInterval;
 // quiz timer
 var count = 59;
 var quizTimer = function () {
-    var timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         if (count > 0 && ((questionCounter + 1) <= questionArray.length)) {
             // TODO need to come up with condition to stop timer after last question answered
             timerEl.textContent = count;
@@ -117,7 +112,8 @@ var endGame = function () {
     showHideQuestions();
     endPageEl.setAttribute("data-state", "visible");
     showHideEndPage(); 
-    
+    clearInterval(timeInterval);
+
     finalScoreEl.textContent = "Your score is " + count + "!";
 
 }
@@ -204,48 +200,45 @@ var scorePage = function () {
     showHideEndPage();
     scorePageEl.setAttribute("data-state", "visible");
     showHideScorePage();
+    saveScore();
+    // addScore();
+}
 
-    addScore();
-
+var HighScorePage = function () {
+    homePageEl.setAttribute("data-state", "hidden");
+    showHideHomePage();
+    endPageEl.setAttribute("data-state", "hidden");
+    showHideEndPage();
+    scorePageEl.setAttribute("data-state", "visible");
+    showHideScorePage();
+    // addScore();
 }
 
 // function to capture name and score value
 var addScore = function () {
     
-    var name = nameInput.value;
+    var highScores = JSON.parse(window.localStorage.getItem("scores")) || [];
 
-    var scoreItemEl = document.createElement("li");
-    scoreItemEl.textContent = "Name: " + name + " - " + "Score: " + count;
-    scoreItemEl.setAttribute("data-player-id", playerCounter)
-    
-    scoreListEl.appendChild(scoreItemEl);
-
-    // push player name and score data from object to array
-    playerDataObj.id = playerCounter;
-    highScores.push(playerDataObj);
-
-    saveScore();
-
-    playerCounter++;
+    highScores.forEach(function(scoreObject) {
+        var scoreItemEl = document.createElement("li");
+        scoreItemEl.textContent = "Name: " + scoreObject.name + " - " + "Score: " + scoreObject.score;
+        scoreListEl.appendChild(scoreItemEl);
+    })  
 }
 
 // function to save array of high scores as string to local storage
 var saveScore = function () {
-    localStorage.setItem("scores", JSON.stringify(highScores));
-}
-
-// function to load scores for local storage
-var loadScores = function () {
-    var savedScores = localStorage.getItem("scores");
-
-    if (!savedScores) {
-        return false;
+    
+    var highScores = JSON.parse(window.localStorage.getItem("scores")) || [];
+    var playerDataObj = {
+        name: nameInput.value,
+        score: count
     }
-
-    savedScores = JSON.parse(savedScores);
-
+    highScores.push(playerDataObj);
+    window.localStorage.setItem("scores", JSON.stringify(highScores));
 }
 
+addScore();
 // event listener to hide opening home page and start quiz when start button is clicked
 startButtonEl.addEventListener("click", startQuiz);
 
@@ -259,7 +252,7 @@ answerDEl.addEventListener("click", checkAnswer);
 submitScore.addEventListener("click", scorePage);
 
 // event listener for score page link
-scorePageLink.addEventListener("click", scorePage);
+scorePageLink.addEventListener("click", HighScorePage);
 
 
 
