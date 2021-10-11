@@ -18,6 +18,13 @@ var scorePageEl = document.querySelector(".score-page");
 var submitScore = document.querySelector("#score-submit");
 var scoreListEl = document.querySelector("#score-list");
 
+var nameInput = document.querySelector("input[name='player-name']");
+var playerCounter = 0;
+var highScores = [];
+var playerDataObj = {
+    name: nameInput.value,
+    score: count
+}
 
 // hide initial question/ end page/ score page HTML elements before starting quiz
 var questionPageElState = questionPageEl.getAttribute("data-state");
@@ -99,25 +106,26 @@ var endGame = function () {
     showHideEndPage(); 
 
     finalScoreEl.textContent = "Your score is " + count + "!";
+
 }
 
 // questions array
 var questionCounter = 0;
 var questionArray = [
-    { question: "What is q1",
-        answers: {a: "q1a1", b: "q1a2", c: "q1a3", d: "q1 correct"},
+    { question: "Which term is used to describe user behavior in web development?",
+        answers: {a: "DOM", b: "Function", c: "Object", d: "Event"},
         correct: "d",
     },
-    { question: "What is q2",
-        answers: {a: "q2a1", b: "q2a2", c: "q2 correct", d: "q2a4"},
+    { question: "Which of the following code would dynamically create an HTML element using JavaScript?",
+        answers: {a: "element.value", b: "element.textContent", c: "document.createElement('li')", d: "element.appendChild()"},
         correct: "c",
     },
-    { question: "What is q3",
-        answers: {a: "q3a1", b: "q3 correct", c: "q3a3", d: "q3a4"},
+    { question: "What type of function passes through another function?",
+        answers: {a: "Event", b: "Callback", c: "Argument", d: "Key"},
         correct: "b",
     },
-    { question: "What is q4",
-        answers: {a: "q4 correct", b: "q4a2", c: "q4a3", d: "q4a4"},
+    { question: "Which type of data can function() localStorage store?",
+        answers: {a: "Strings", b: "Objects", c: "Arrays", d: "Integers"},
         correct: "a",
     }
 ];
@@ -183,17 +191,49 @@ var scorePage = function () {
     showHideScorePage();
 
     addScore();
+    saveScore();
+    loadScores();
 
 }
 
+// function to capture name and score value
 var addScore = function () {
     
-    var nameInput = document.querySelector("input[name='player-name']").value;
+    var name = nameInput.value;
 
     var scoreItemEl = document.createElement("li");
-    scoreItemEl.textContent = "Name: " + nameInput + "    " + "Score: " + count;
-
+    scoreItemEl.textContent = "Name: " + name + "    " + "Score: " + count;
+    scoreItemEl.setAttribute("data-player-id", playerCounter)
+    
     scoreListEl.appendChild(scoreItemEl);
+
+    // function to push player name and score data from object to array
+    playerDataObj.id = playerCounter;
+    highScores.push(playerDataObj);
+
+    saveScore();
+
+    playerCounter++;
+}
+
+// function to save array of high scores as string to local storage
+var saveScore = function () {
+    localStorage.setItem("scores", JSON.stringify(highScores));
+}
+
+// function to load scores for local storage
+var loadScores = function () {
+    var savedScores = localStorage.getItem("scores");
+
+    if (!savedScores) {
+        return false;
+    }
+
+    savedScores = JSON.parse(savedScores);
+
+    for (var i = 0; i < savedScores.length; i++) {
+        addScore(savedScores[i]);
+    }
 }
 
 // event listener to hide opening home page and start quiz when start button is clicked
