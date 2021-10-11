@@ -117,7 +117,7 @@ var endGame = function () {
     showHideQuestions();
     endPageEl.setAttribute("data-state", "visible");
     showHideEndPage(); 
-
+    
     finalScoreEl.textContent = "Your score is " + count + "!";
 
 }
@@ -137,7 +137,7 @@ var questionArray = [
         answers: {a: "Event", b: "Callback", c: "Argument", d: "Key"},
         correct: "b",
     },
-    { question: "Which type of data can function() localStorage store?",
+    { question: "Which type of data can the function() localStorage store?",
         answers: {a: "Strings", b: "Objects", c: "Arrays", d: "Integers"},
         correct: "a",
     }
@@ -206,8 +206,6 @@ var scorePage = function () {
     showHideScorePage();
 
     addScore();
-    saveScore();
-    loadScores();
 
 }
 
@@ -217,12 +215,12 @@ var addScore = function () {
     var name = nameInput.value;
 
     var scoreItemEl = document.createElement("li");
-    scoreItemEl.textContent = "Name: " + name + "    " + "Score: " + count;
+    scoreItemEl.textContent = "Name: " + name + " - " + "Score: " + count;
     scoreItemEl.setAttribute("data-player-id", playerCounter)
     
     scoreListEl.appendChild(scoreItemEl);
 
-    // function to push player name and score data from object to array
+    // push player name and score data from object to array
     playerDataObj.id = playerCounter;
     highScores.push(playerDataObj);
 
@@ -246,9 +244,6 @@ var loadScores = function () {
 
     savedScores = JSON.parse(savedScores);
 
-    for (var i = 0; i < savedScores.length; i++) {
-        addScore(savedScores[i]);
-    }
 }
 
 // event listener to hide opening home page and start quiz when start button is clicked
