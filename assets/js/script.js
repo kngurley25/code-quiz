@@ -100,7 +100,7 @@ var quizTimer = function () {
         }
         else {
             clearInterval(timeInterval);
-            endGame
+            endGame();
         }
     }, 1000);
 }
