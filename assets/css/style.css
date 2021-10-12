@@ -88,6 +88,11 @@ main p {
     height: 50px;
 }
 
+.button:hover {
+    background-color: #800080;
+    opacity: 0.5;
+}
+
 form {   
     margin: 10px 6px 10px 0;
 }
@@ -126,5 +131,9 @@ form input {
 .question-confirm-message {
     text-align: center;
     font-weight: lighter;
+}
+.score-list-item {
+    text-align: left;
+    margin: 10px auto;
 }
 

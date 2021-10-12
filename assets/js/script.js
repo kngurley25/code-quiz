@@ -101,7 +101,7 @@ var quizTimer = function () {
         }
         else {
             clearInterval(timeInterval);
-            timerEl.textContent = "End of Game";
+            
         }
     }, 1000);
 }
@@ -113,7 +113,7 @@ var endGame = function () {
     endPageEl.setAttribute("data-state", "visible");
     showHideEndPage(); 
     clearInterval(timeInterval);
-
+    timerEl.textContent = "End of Game";
     finalScoreEl.textContent = "Your score is " + count + "!";
 
 }
@@ -201,7 +201,7 @@ var scorePage = function () {
     scorePageEl.setAttribute("data-state", "visible");
     showHideScorePage();
     saveScore();
-    // addScore();
+    addScore();
 }
 
 var HighScorePage = function () {
@@ -211,7 +211,8 @@ var HighScorePage = function () {
     showHideEndPage();
     scorePageEl.setAttribute("data-state", "visible");
     showHideScorePage();
-    // addScore();
+    homePageEl.setAttribute("data-state", "hidden");
+    addScore();
 }
 
 // function to capture name and score value
@@ -222,6 +223,7 @@ var addScore = function () {
     highScores.forEach(function(scoreObject) {
         var scoreItemEl = document.createElement("li");
         scoreItemEl.textContent = "Name: " + scoreObject.name + " - " + "Score: " + scoreObject.score;
+        scoreItemEl.className = "score-list-item";
         scoreListEl.appendChild(scoreItemEl);
     })  
 }
@@ -238,7 +240,7 @@ var saveScore = function () {
     window.localStorage.setItem("scores", JSON.stringify(highScores));
 }
 
-addScore();
+
 // event listener to hide opening home page and start quiz when start button is clicked
 startButtonEl.addEventListener("click", startQuiz);
 
