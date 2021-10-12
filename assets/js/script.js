@@ -94,14 +94,13 @@ var timeInterval;
 var count = 59;
 var quizTimer = function () {
     timeInterval = setInterval(function () {
-        if (count > 0 && ((questionCounter + 1) <= questionArray.length)) {
-            // TODO need to come up with condition to stop timer after last question answered
+        if (count > 0) {
             timerEl.textContent = count;
             count--;
         }
         else {
             clearInterval(timeInterval);
-            
+            endGame
         }
     }, 1000);
 }
@@ -136,6 +135,14 @@ var questionArray = [
     { question: "Which type of data can the function() localStorage store?",
         answers: {a: "Strings", b: "Objects", c: "Arrays", d: "Integers"},
         correct: "a",
+    },
+    { question: "Which of the following syntax is correct for an 'or' conditional?",
+        answers: {a: "OR", b: "||", c: "'or''", d: "(or)"},
+        correct: "b",
+    },
+    { question: "Which function would construct an object or value from a sting?",
+        answers: {a: "get.Value", b: "JSON.Obj", c: "JSON.stringify", d: "JSON.parse"},
+        correct: "d",
     }
 ];
 

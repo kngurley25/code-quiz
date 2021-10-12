@@ -13,4 +13,4 @@ An application in which a user can test their knowledge of JavaScript.
 https://kngurley25.github.io/code-quiz/
 
 ## Image
-![screenshot](./code-quiz.png)
+![screenshot](./code-quiz.PNG)
